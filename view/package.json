@@ -1,0 +1,21 @@
+{
+  "name": "view",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "set PARCEL_CACHE_DIR=.parcel-cache && parcel index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@stomp/stompjs": "^7.1.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "sockjs-client": "^1.6.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.15.4"
+  }
+}
