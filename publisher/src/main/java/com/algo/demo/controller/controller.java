@@ -18,8 +18,9 @@ public class controller{
     @GetMapping("/tree")
     public String tree() {
         //code.numDistinct("rabbbit", "rabbit");
-        //code.fibonacci(6);
-        code.minPathSum(0, 0, new int[][]{{1,3,1},{1,5,1},{4,2,1}});
+        code.fibonacci(6);
+        //code.minPathSum(0, 0, new int[][]{{1,3,1},{1,5,1},{4,2,1}});
+        //code.binarySearch(new int[]{1,2,3,1,1}, 4);
         return "done";
     }
 }

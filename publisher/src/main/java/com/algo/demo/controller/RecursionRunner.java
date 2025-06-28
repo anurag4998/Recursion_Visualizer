@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.algo.demo.pubSub.Publisher;
+import com.algo.demo.templates.RecursiveFour;
 
 @Component
 public class RecursionRunner {
@@ -45,11 +46,11 @@ public class RecursionRunner {
         return result;
     }
 
-    public <T1, T2, T3, T4, R> R runRecursiveFourWithParentId(RecursiveFourWithParentID<T1, T2, T3, T4, R> function, T1 param1, T2 param2, T3 param3, T4 param4) {
+    public <T1, T2, T3, T4, R> R runRecursiveFourWithParentId(RecursiveFour<T1, T2, T3, T4, R> function, T1 param1, T2 param2, T3 param3, T4 param4) {
         Message firstMessage = new Message();
         firstMessage.setMessage("first packet");
         publisher.notifyObservers(firstMessage);
-        R result = function.recurse(function, param1, param2, param3 , param4, 0, null, null);
+        R result = function.recurse(function, param1, param2, param3 , param4);
         Message lastMessage = new Message();
         lastMessage.setIsLastPacket();
         publisher.notifyObservers(lastMessage);
