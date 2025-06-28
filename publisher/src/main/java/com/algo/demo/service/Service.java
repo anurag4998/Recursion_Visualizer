@@ -2,8 +2,8 @@ package com.algo.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.algo.demo.controller.Message;
 import com.algo.demo.service.kafkaproducer.MessageProducer;
+import com.algo.demo.wrapper.consumers.Message;
 
 @org.springframework.stereotype.Service
 public class Service {

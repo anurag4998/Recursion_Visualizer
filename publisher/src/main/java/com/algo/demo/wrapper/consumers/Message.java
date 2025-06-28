@@ -1,4 +1,4 @@
-package com.algo.demo.controller;
+package com.algo.demo.wrapper.consumers;
 
 import java.util.UUID;
 
@@ -9,11 +9,11 @@ public class Message {
     public UUID currentId;
     public boolean isLastPacket;
 
-    public Message(int level, String message, UUID parentId, UUID currentId) {
+    public Message(int level, String message, UUID parentId ) {
         this.level = level;
         this.message = message;
         this.parentId = parentId;
-        this.currentId = currentId;
+        this.currentId = UUID.randomUUID();
     }
 
     public Message() {

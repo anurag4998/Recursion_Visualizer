@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.algo.demo.wrapper.RecursiveTwo;
+
 
 @Controller
 public class controller{
@@ -18,7 +20,17 @@ public class controller{
     @GetMapping("/tree")
     public String tree() {
         //code.numDistinct("rabbbit", "rabbit");
-        code.fibonacci(6);
+        RecursiveTwo<Integer,int[], Integer> fibonacci = (n, dp, self) -> {
+            if(n <= 1) {
+                return n;
+            }
+            if(dp[n] != -1) {
+                return dp[n];
+            }
+            return self.execute(n - 1, dp, self) + self.execute(n - 2, dp, self);
+        };
+
+        code.main(5, fibonacci);
         //code.minPathSum(0, 0, new int[][]{{1,3,1},{1,5,1},{4,2,1}});
         //code.binarySearch(new int[]{1,2,3,1,1}, 4);
         return "done";

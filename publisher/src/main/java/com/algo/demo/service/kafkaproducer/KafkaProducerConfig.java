@@ -7,9 +7,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
-
-import com.algo.demo.controller.Message;
 import org.springframework.kafka.support.serializer.JsonSerializer;
+
+import com.algo.demo.wrapper.consumers.Message;
+
 import java.util.HashMap;
 import java.util.Map;
 @Configuration
