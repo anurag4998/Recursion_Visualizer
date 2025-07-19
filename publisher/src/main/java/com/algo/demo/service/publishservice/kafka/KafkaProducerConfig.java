@@ -1,4 +1,4 @@
-package com.algo.demo.service.kafkaproducer;
+package com.algo.demo.service.publishservice.kafka;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 @Configuration
 public class KafkaProducerConfig {
+
+    //making this a bean so that we only have one instance of the factory
     @Bean
     public ProducerFactory<String, Message> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
