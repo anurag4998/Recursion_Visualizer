@@ -20,4 +20,23 @@ public class Publisher implements IPublisher {
         this.publishService.publishMessage(message);
     }
 
+    @Override
+    public void publishErrorMessage(Message message) {
+
+    }
+
+    @Override
+    public void publishInitMessage() {
+        Message firstMessage = new Message();
+        firstMessage.setMessage("first packet");
+        this.publishService.publishMessage(firstMessage);
+    }
+
+    @Override
+    public void publishEndMessage() {
+        Message lastMessage = new Message();
+        lastMessage.setIsLastPacket();
+        this.publishService.publishMessage(lastMessage);
+    }
+
 }

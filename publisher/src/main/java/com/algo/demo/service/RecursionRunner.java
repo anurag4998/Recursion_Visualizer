@@ -1,11 +1,11 @@
 package com.algo.demo.service;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.algo.demo.wrapper.consumers.Message;
 import com.algo.demo.wrapper.funcItfs.RecursiveFour;
 import com.algo.demo.wrapper.funcItfs.RecursiveFunc;
 import com.algo.demo.wrapper.funcItfs.RecursiveThree;
@@ -26,23 +26,26 @@ public class RecursionRunner {
     }
 
     public void runRecursiveComputation(RecursiveFunc funcToExecute, String templateMessage, Object... args) {
-        executorService.submit(() -> {
-            publishFirstMessage();
-            invokeRecursiveWrapper(funcToExecute, templateMessage, args);
-            publishLastMessage();
+        CompletableFuture<Void> processingFtr = CompletableFuture.runAsync(() -> {
+            try {
+                publisher.publishInitMessage();
+                invokeRecursiveWrapper(funcToExecute, templateMessage, args);
+                publisher.publishEndMessage();
+            }
+            catch (Exception e) {
+                System.err.println("Error during recursive computation: " + e.getMessage());
+            }
+           
+        }, executorService);
+
+        processingFtr.whenComplete((resp, err) -> {
+            if(err != null) {
+                System.err.println("Error in processing future: " + err.getMessage());
+                //publisher.publishErrorMessage(new Message("Error occurred during processing: " + err.getMessage()));
+            } else {
+                System.out.println("Processing completed successfully.");
+            }
         });
-    }
-
-    private void publishFirstMessage() {
-        Message firstMessage = new Message();
-        firstMessage.setMessage("first packet");
-        publisher.publish(firstMessage);
-    }
-
-    private void publishLastMessage() {
-        Message lastMessage = new Message();
-        lastMessage.setIsLastPacket();
-        publisher.publish(lastMessage);
     }
 
     @SuppressWarnings("unchecked")
